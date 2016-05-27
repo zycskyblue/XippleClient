@@ -13,7 +13,9 @@ public class XippleServletContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        ws = new XippleWebSocketClient("wss://s2.ripple.com");
+        ws = new XippleWebSocketClient();
+
+        ws.connect("ws://192.168.214.63:6666");
     }
 
     @Override

@@ -11,9 +11,13 @@ import java.net.URI;
 @ClientEndpoint
 public class XippleWebSocketClient {
 
-    Session userSession = null;
+    private Session userSession = null;
 
-    public XippleWebSocketClient(String endpointURI) {
+    public XippleWebSocketClient(){
+
+    }
+
+    public void connect(String endpointURI){
         try {
             URI _endpointURI = URI.create(endpointURI);
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
@@ -25,9 +29,13 @@ public class XippleWebSocketClient {
 
     @OnOpen
     public void onOpen(Session userSession) {
-        System.out.println("opening websocket");
+        System.out.println("opened websocket");
         this.userSession = userSession;
         this.sendMessage("{\"id\": 1, \"command\": \"server_info\"}");
+
+        this.sendMessage("{ \"id\": 2, \"command\": \"submit\", \"tx_json\" : { \"TransactionType\" : \"Payment\", \"Account\" : \"rLtNovmk4CWD2LnAnQ6wA2wMREE49VL268\", \"Destination\" : \"rDp9sAts5XvhHFstbXw7shXSKW7kkMBJLi\", \"Amount\" : \"10000000\" , \"Fee\" : \"10000\" }, \"memos\" : [ { \"type\": \"test\", \"format\": \"plain/text\", \"data\": \"texted data\" } ] , \"secret\" : \"spjBEL6dVQip5hGUNj7HcBmCV6B4s\" }");
+        //this.sendMessage("{ \"id\": 3, \"command\": \"tx\", \"transaction\": \"2312C403D6078A66658C146F98D219A08705372BB65527E1521FBC4A0E56000D\", \"binary\": false }");
+
     }
 
     @OnClose
@@ -46,9 +54,12 @@ public class XippleWebSocketClient {
         t.printStackTrace();
     }
 
-
     public void sendMessage(String message) {
-        this.userSession.getAsyncRemote().sendText(message);
+        try {
+            userSession.getBasicRemote().sendText(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void Close() throws IOException {
