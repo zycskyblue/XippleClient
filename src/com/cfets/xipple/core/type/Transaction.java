@@ -1,4 +1,4 @@
-package com.cfets.xipple.core;
+package com.cfets.xipple.core.type;
 
 import java.math.BigDecimal;
 

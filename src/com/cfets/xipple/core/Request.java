@@ -1,5 +1,7 @@
 package com.cfets.xipple.core;
 
+import java.util.Random;
+
 /**
  * Created by ZYC on 2016/5/28.
  */
@@ -9,11 +11,11 @@ public class Request {
 
     private String command;
 
-    public Request() {
+    protected Request() {
     }
 
     public Request(String command) {
-        this.id = "123";
+        this.id = String.valueOf(new Random().nextLong());
         this.command = command;
     }
 

@@ -10,7 +10,7 @@ import javax.websocket.*;
  */
 public class Codec implements Encoder.Text<Request>, Decoder.Text<Response> {
 
-    GsonBuilder _gb;
+    private GsonBuilder _gb;
 
     @Override
     public String encode(Request abstractRequest) throws EncodeException {

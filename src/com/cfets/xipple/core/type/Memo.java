@@ -1,4 +1,4 @@
-package com.cfets.xipple.core;
+package com.cfets.xipple.core.type;
 
 /**
  * Created by ZYC on 2016/5/29.

@@ -1,4 +1,6 @@
-package com.cfets.xipple.core;
+package com.cfets.xipple.core.type;
+
+import com.cfets.xipple.core.Request;
 
 import java.util.List;
 
